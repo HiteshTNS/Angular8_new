@@ -1,0 +1,52 @@
+<div class="container">
+  <h1 class="text-center">Employee Management</h1>
+
+  <!-- Add/Edit Employee Form -->
+  <div class="form-container">
+    <h2>{{ editMode ? 'Edit Employee' : 'Add Employee' }}</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" [(ngModel)]="newEmployee.name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="position">Position</label>
+        <input type="text" id="position" [(ngModel)]="newEmployee.position" name="position" required>
+      </div>
+      <div class="form-group">
+        <label for="department">Department</label>
+        <input type="text" id="department" [(ngModel)]="newEmployee.department" name="department" required>
+      </div>
+      <button type="submit">{{ editMode ? 'Update Employee' : 'Add Employee' }}</button>
+      <button type="button" *ngIf="editMode" (click)="resetForm()">Cancel</button>
+    </form>
+  </div>
+
+  <!-- Employee List -->
+  <div class="employee-list">
+    <h2>Employee List</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>EmployeeId</th>
+          <th>Name</th>
+          <th>Position</th>
+          <th>Department</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employees">
+          <td>{{ employee.id }}</td>
+          <td>{{ employee.name }}</td>
+          <td>{{ employee.position }}</td>
+          <td>{{ employee.department }}</td>
+          <td>
+            <button (click)="editEmployee(employee)">Edit</button>
+            <button (click)="deleteEmployee(employee.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
